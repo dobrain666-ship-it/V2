@@ -118,6 +118,40 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
 #audio-toggle.muted svg{stroke:var(--red)}
 #audio-toggle.muted{border-color:rgba(248,113,113,.5)}
 
+/* 🔊 SOUND PROMPT */
+#sound-prompt{
+  position:fixed;
+  bottom:70px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:45000;
+  padding:10px 18px;
+  border-radius:30px;
+  background:linear-gradient(135deg,rgba(124,92,255,.9),rgba(34,211,238,.85));
+  color:#fff;
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  box-shadow:0 8px 28px rgba(124,92,255,.6);
+  animation:soundPulse 1.6s ease-in-out infinite;
+  transition:.3s;
+  white-space:nowrap;
+}
+#sound-prompt:hover{transform:translateX(-50%) scale(1.05)}
+#sound-prompt:active{transform:translateX(-50%) scale(.95)}
+#sound-prompt.hide{opacity:0;visibility:hidden;pointer-events:none;transform:translateX(-50%) translateY(20px)}
+#sound-prompt svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.2}
+@keyframes soundPulse{
+  0%,100%{box-shadow:0 8px 28px rgba(124,92,255,.6)}
+  50%{box-shadow:0 8px 38px rgba(34,211,238,.85),0 0 0 8px rgba(124,92,255,.15)}
+}
+
 @media (max-width:380px){.card-ui{max-width:100%;padding:16px 14px 14px}.option-btn{font-size:10px;padding:12px}}
 @media (max-height:640px){.card-ui{padding:14px 12px 12px}}
 @media (min-width:768px){.card-ui{max-width:380px;padding:24px 22px 22px}.option-btn{font-size:12px;padding:16px}#audio-toggle{width:50px;height:50px;bottom:22px;right:22px}#audio-toggle svg{width:22px;height:22px}}
@@ -125,7 +159,7 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
 </head>
 <body>
 
-<!-- 🔊 FLOATING AUDIO TOGGLE (visible on all screens) -->
+<!-- 🔊 FLOATING AUDIO TOGGLE -->
 <div id="audio-toggle" title="Toggle sound">
   <svg id="audio-icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
     <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
@@ -291,6 +325,15 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
 <div class="loader" id="loader">
   <div class="loader-ring"></div>
   <div class="loader-text">SEARCHING</div>
+</div>
+
+<!-- 🔊 SOUND PROMPT -->
+<div id="sound-prompt">
+  <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+  </svg>
+  TAP FOR SOUND
 </div>
 
 <script>
@@ -541,26 +584,39 @@ function esc(s){
 const bgVideo = document.getElementById('bg-video');
 const audioToggle = document.getElementById('audio-toggle');
 const audioIcon = document.getElementById('audio-icon');
+const soundPrompt = document.getElementById('sound-prompt');
 
-// Start muted (browsers block autoplay with sound)
+// Start muted (browser rule)
 bgVideo.muted = true;
 bgVideo.volume = 1.0;
 bgVideo.play().catch(()=>{});
 
-// Try to auto-unmute on first user interaction (any click/tap)
-let autoUnmuteDone = false;
-function tryAutoUnmute(){
-  if(autoUnmuteDone) return;
-  autoUnmuteDone = true;
+// 🔊 ENABLE SOUND — called on any user tap
+function enableSound(){
   bgVideo.muted = false;
   bgVideo.volume = 1.0;
   bgVideo.play().catch(()=>{});
   updateAudioIcon();
+  if(soundPrompt) soundPrompt.classList.add('hide');
 }
-document.addEventListener('touchstart', tryAutoUnmute, { once:true, passive:true });
-document.addEventListener('click', tryAutoUnmute, { once:true });
 
-// Toggle button
+// Tap on prompt → enable sound
+soundPrompt.addEventListener('click', (e)=>{
+  e.stopPropagation();
+  enableSound();
+});
+
+// Any tap anywhere also enables sound (and hides prompt)
+let soundEnabled = false;
+function firstTap(){
+  if(soundEnabled) return;
+  soundEnabled = true;
+  enableSound();
+}
+document.addEventListener('touchstart', firstTap, { once:true, passive:true });
+document.addEventListener('click', firstTap, { once:true });
+
+// 🔊 Mute/Unmute toggle button
 audioToggle.addEventListener('click', (e)=>{
   e.stopPropagation();
   bgVideo.muted = !bgVideo.muted;
