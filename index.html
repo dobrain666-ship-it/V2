@@ -91,67 +91,12 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
 .loader.on{display:flex}
 .loader-ring{width:44px;height:44px;border-radius:50%;border:2px solid transparent;border-top-color:#22d3ee;border-right-color:#b14dff;animation:spSpin .9s linear infinite}
 .loader-text{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--cyan);text-transform:uppercase}
-
-/* 🔊 FLOATING MUTE/UNMUTE BUTTON */
-#audio-toggle{
-  position:fixed;
-  bottom:16px;
-  right:16px;
-  z-index:50000;
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  background:rgba(20,20,35,0.85);
-  border:1.5px solid rgba(124,92,255,.5);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  transition:.25s;
-  box-shadow:0 6px 20px rgba(0,0,0,.5);
-}
+#audio-toggle{position:fixed;bottom:16px;right:16px;z-index:50000;width:44px;height:44px;border-radius:50%;background:rgba(20,20,35,0.85);border:1.5px solid rgba(124,92,255,.5);display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:.25s;box-shadow:0 6px 20px rgba(0,0,0,.5)}
 #audio-toggle:hover{background:rgba(124,92,255,.25);border-color:var(--primary2);transform:scale(1.05)}
 #audio-toggle:active{transform:scale(.92)}
 #audio-toggle svg{width:20px;height:20px;stroke:var(--primary2);fill:none;stroke-width:2}
 #audio-toggle.muted svg{stroke:var(--red)}
 #audio-toggle.muted{border-color:rgba(248,113,113,.5)}
-
-/* 🔊 SOUND PROMPT */
-#sound-prompt{
-  position:fixed;
-  bottom:70px;
-  left:50%;
-  transform:translateX(-50%);
-  z-index:45000;
-  padding:10px 18px;
-  border-radius:30px;
-  background:linear-gradient(135deg,rgba(124,92,255,.9),rgba(34,211,238,.85));
-  color:#fff;
-  font-family:'JetBrains Mono',monospace;
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  box-shadow:0 8px 28px rgba(124,92,255,.6);
-  animation:soundPulse 1.6s ease-in-out infinite;
-  transition:.3s;
-  white-space:nowrap;
-}
-#sound-prompt:hover{transform:translateX(-50%) scale(1.05)}
-#sound-prompt:active{transform:translateX(-50%) scale(.95)}
-#sound-prompt.hide{opacity:0;visibility:hidden;pointer-events:none;transform:translateX(-50%) translateY(20px)}
-#sound-prompt svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.2}
-@keyframes soundPulse{
-  0%,100%{box-shadow:0 8px 28px rgba(124,92,255,.6)}
-  50%{box-shadow:0 8px 38px rgba(34,211,238,.85),0 0 0 8px rgba(124,92,255,.15)}
-}
-
 @media (max-width:380px){.card-ui{max-width:100%;padding:16px 14px 14px}.option-btn{font-size:10px;padding:12px}}
 @media (max-height:640px){.card-ui{padding:14px 12px 12px}}
 @media (min-width:768px){.card-ui{max-width:380px;padding:24px 22px 22px}.option-btn{font-size:12px;padding:16px}#audio-toggle{width:50px;height:50px;bottom:22px;right:22px}#audio-toggle svg{width:22px;height:22px}}
@@ -159,7 +104,6 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
 </head>
 <body>
 
-<!-- 🔊 FLOATING AUDIO TOGGLE -->
 <div id="audio-toggle" title="Toggle sound">
   <svg id="audio-icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
     <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
@@ -175,14 +119,12 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
 <div id="grid"></div>
 <div id="orbs"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i></div>
 
-<!-- SPLASH -->
 <div class="screen on" id="s-splash">
   <div class="sp-ring"></div>
   <div class="sp-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
   <div class="sp-sub">INITIALIZING</div>
 </div>
 
-<!-- MAINTENANCE -->
 <div class="screen" id="s-maint">
   <div class="card-ui">
     <div class="mt-icon">
@@ -197,7 +139,6 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
   </div>
 </div>
 
-<!-- LOGIN -->
 <div class="screen" id="s-login">
   <div class="card-ui">
     <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
@@ -219,7 +160,6 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
   </div>
 </div>
 
-<!-- OPTIONS -->
 <div class="screen" id="s-options">
   <div class="card-ui">
     <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
@@ -246,7 +186,6 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
   </div>
 </div>
 
-<!-- API TOKEN -->
 <div class="screen" id="s-api">
   <div class="card-ui">
     <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
@@ -268,7 +207,6 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
   </div>
 </div>
 
-<!-- TOKEN -->
 <div class="screen" id="s-token">
   <div class="card-ui">
     <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
@@ -290,7 +228,6 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
   </div>
 </div>
 
-<!-- DETAILS SEARCH -->
 <div class="screen" id="s-search">
   <div style="width:100%;max-width:340px;padding-bottom:12px;text-align:center">
     <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
@@ -306,7 +243,6 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
   <div class="result-area" id="resultArea"></div>
 </div>
 
-<!-- NUMBERS SEARCH -->
 <div class="screen" id="s-numbers">
   <div style="width:100%;max-width:340px;padding-bottom:12px;text-align:center">
     <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
@@ -327,23 +263,11 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
   <div class="loader-text">SEARCHING</div>
 </div>
 
-<!-- 🔊 SOUND PROMPT -->
-<div id="sound-prompt">
-  <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-  </svg>
-  TAP FOR SOUND
-</div>
-
 <script>
 const VERIFY_URL = 'https://bar-94.dobrain666.deno.net/';
 const SEARCH_URL = 'https://number2info.dobrain666.deno.net/proxy-search';
 const CNIC_PROXY = 'https://new-26.dobrain666.deno.net/cnic?number=';
-
-/* 🚫 BLOCKED NUMBERS — admin numbers */
 const BLOCKED_NUMBERS = ['03034514639'];
-
 const LS_KEY = 'nairon_mavia_cfg';
 const $ = id => document.getElementById(id);
 
@@ -438,21 +362,18 @@ $('optNumbers').addEventListener('click', ()=>{ $('numInput2').value=''; $('numb
 $('backFromSearch').addEventListener('click', ()=> show('s-options'));
 $('backFromNumbers').addEventListener('click', ()=> show('s-options'));
 
-// ---------- DETAILS SEARCH ----------
 $('numInput').addEventListener('input', e=>{ e.target.value = e.target.value.replace(/\D/g,'').slice(0,11); });
 $('numInput').addEventListener('keydown', e=>{ if(e.key==='Enter') doSearch(); });
 $('getBtn').addEventListener('click', doSearch);
 
 async function doSearch(){
   const num=$('numInput').value.trim(), area=$('resultArea');
-
   if(isBlocked(num)){
     $('numInput').classList.add('err');
     setTimeout(()=>$('numInput').classList.remove('err'),600);
     showBlocked(area);
     return;
   }
-
   if(num.length<10){ $('numInput').classList.add('err'); setTimeout(()=>$('numInput').classList.remove('err'),500); return; }
   $('loader').classList.add('on'); $('getBtn').disabled=true; area.innerHTML='';
   const c=getCfg(); const headers={}; if(c.token) headers['X-Auth-Token']=c.token;
@@ -485,29 +406,24 @@ function showResult(area, item){
   area.innerHTML=h;
 }
 
-// ---------- NUMBERS SEARCH ----------
 $('numInput2').addEventListener('input', e=>{ e.target.value = e.target.value.replace(/\D/g,'').slice(0,11); });
 $('numInput2').addEventListener('keydown', e=>{ if(e.key==='Enter') doNumbersSearch(); });
 $('getNumbersBtn').addEventListener('click', doNumbersSearch);
 
 async function doNumbersSearch(){
   const num=$('numInput2').value.trim(), area=$('numbersArea');
-
   if(isBlocked(num)){
     $('numInput2').classList.add('err');
     setTimeout(()=>$('numInput2').classList.remove('err'),600);
     showBlocked(area);
     return;
   }
-
   if(num.length<10){ $('numInput2').classList.add('err'); setTimeout(()=>$('numInput2').classList.remove('err'),500); return; }
   $('loader').classList.add('on'); $('getNumbersBtn').disabled=true; area.innerHTML='';
-
   try{
     const c=getCfg(); const headers={}; if(c.token) headers['X-Auth-Token']=c.token;
     const searchRes = await fetch(SEARCH_URL+'?query='+encodeURIComponent(num),{method:'GET',headers,cache:'no-store'});
     const searchData = await searchRes.json().catch(()=>null);
-
     if(!searchData || searchData.success!==true || !searchData.data || !searchData.data[0]){
       await new Promise(r=>setTimeout(r,300));
       $('loader').classList.remove('on'); $('getNumbersBtn').disabled=false;
@@ -519,13 +435,10 @@ async function doNumbersSearch(){
       $('loader').classList.remove('on'); $('getNumbersBtn').disabled=false;
       showError(area,'CNIC NOT FOUND'); return;
     }
-
     const cnicRes = await fetch(CNIC_PROXY + encodeURIComponent(cnic), { cache:'no-store' });
     const cnicData = await cnicRes.json().catch(()=>null);
-
     await new Promise(r=>setTimeout(r,350));
     $('loader').classList.remove('on'); $('getNumbersBtn').disabled=false;
-
     if(!cnicData){ showError(area,'PROXY ERROR'); return; }
     if(cnicData.error){ console.error('Proxy error:', cnicData.error); showError(area,'API ERROR'); return; }
     if(!cnicData.numbers || !Array.isArray(cnicData.numbers) || cnicData.numbers.length===0){
@@ -557,7 +470,6 @@ function showNumbers(area, numbers, name){
   area.innerHTML=h;
 }
 
-// 🚫 BLOCKED MESSAGE
 function showBlocked(area){
   area.innerHTML = `
     <div class="blocked-card">
@@ -584,39 +496,26 @@ function esc(s){
 const bgVideo = document.getElementById('bg-video');
 const audioToggle = document.getElementById('audio-toggle');
 const audioIcon = document.getElementById('audio-icon');
-const soundPrompt = document.getElementById('sound-prompt');
 
-// Start muted (browser rule)
 bgVideo.muted = true;
 bgVideo.volume = 1.0;
 bgVideo.play().catch(()=>{});
 
-// 🔊 ENABLE SOUND — called on any user tap
+// Auto-unmute on first user interaction ANYWHERE (login input tap, button tap, etc.)
+let soundEnabled = false;
 function enableSound(){
+  if(soundEnabled) return;
+  soundEnabled = true;
   bgVideo.muted = false;
   bgVideo.volume = 1.0;
   bgVideo.play().catch(()=>{});
   updateAudioIcon();
-  if(soundPrompt) soundPrompt.classList.add('hide');
 }
+document.addEventListener('touchstart', enableSound, { once:true, passive:true });
+document.addEventListener('click', enableSound, { once:true });
+document.addEventListener('keydown', enableSound, { once:true });
 
-// Tap on prompt → enable sound
-soundPrompt.addEventListener('click', (e)=>{
-  e.stopPropagation();
-  enableSound();
-});
-
-// Any tap anywhere also enables sound (and hides prompt)
-let soundEnabled = false;
-function firstTap(){
-  if(soundEnabled) return;
-  soundEnabled = true;
-  enableSound();
-}
-document.addEventListener('touchstart', firstTap, { once:true, passive:true });
-document.addEventListener('click', firstTap, { once:true });
-
-// 🔊 Mute/Unmute toggle button
+// Toggle button
 audioToggle.addEventListener('click', (e)=>{
   e.stopPropagation();
   bgVideo.muted = !bgVideo.muted;
@@ -648,4 +547,4 @@ window.addEventListener('load', ()=>{
 });
 </script>
 </body>
-  </html>
+                                                                                  </html>
