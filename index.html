@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover"/>
-<title>ɴᴀɪʀᴏɴ</title>
+<title>ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -31,12 +31,12 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
 .screen.on{opacity:1;visibility:visible;pointer-events:auto}
 .sp-ring{width:44px;height:44px;border-radius:50%;border:2px solid rgba(124,92,255,.2);border-top-color:#a78bfa;border-right-color:#22d3ee;animation:spSpin .9s linear infinite;box-shadow:0 0 22px rgba(124,92,255,.5);margin-bottom:14px}
 @keyframes spSpin{to{transform:rotate(360deg)}}
-.sp-logo{font-family:'Cinzel',serif;font-weight:900;font-size:16px;letter-spacing:5px;background:linear-gradient(90deg,#a78bfa,#22d3ee,#f472b6,#a78bfa);background-size:300% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 3s linear infinite;margin-bottom:8px;text-align:center}
+.sp-logo{font-family:'Cinzel',serif;font-weight:900;font-size:16px;letter-spacing:4px;background:linear-gradient(90deg,#a78bfa,#22d3ee,#f472b6,#a78bfa);background-size:300% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 3s linear infinite;margin-bottom:8px;text-align:center}
 @keyframes shine{to{background-position:300% center}}
 .sp-sub{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--dim)}
 .card-ui{width:100%;max-width:340px;padding:18px 16px 16px;border-radius:16px;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);text-align:center;position:relative;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.5);margin:auto}
 .card-ui::before{content:'';position:absolute;top:0;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,var(--primary2),var(--cyan),transparent)}
-.brand-logo{font-family:'Cinzel',serif;font-weight:900;font-size:14px;letter-spacing:4px;background:linear-gradient(90deg,#fff,#a78bfa 40%,#22d3ee 70%,#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 5s linear infinite;margin-bottom:4px}
+.brand-logo{font-family:'Cinzel',serif;font-weight:900;font-size:13px;letter-spacing:3px;background:linear-gradient(90deg,#fff,#a78bfa 40%,#22d3ee 70%,#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 5s linear infinite;margin-bottom:4px}
 .brand-tag{font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--dim);margin-bottom:14px}
 .icon-box{width:40px;height:40px;margin:0 auto 10px;border-radius:11px;background:linear-gradient(135deg,rgba(124,92,255,.25),rgba(244,114,182,.15));border:1px solid rgba(124,92,255,.4);display:flex;align-items:center;justify-content:center}
 .icon-box svg{width:18px;height:18px;stroke:var(--primary2);fill:none;stroke-width:1.8}
@@ -91,35 +91,50 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
 .loader.on{display:flex}
 .loader-ring{width:44px;height:44px;border-radius:50%;border:2px solid transparent;border-top-color:#22d3ee;border-right-color:#b14dff;animation:spSpin .9s linear infinite}
 .loader-text{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--cyan);text-transform:uppercase}
-/* SOUND UNLOCK */
-#sound-unlock{position:fixed;inset:0;z-index:20000;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(6,6,12,0.85);backdrop-filter:blur(8px);cursor:pointer;transition:opacity .4s,visibility .4s}
-#sound-unlock.hide{opacity:0;visibility:hidden;pointer-events:none}
-#sound-unlock .su-ring{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,rgba(124,92,255,.25),rgba(34,211,238,.15));border:2px solid rgba(124,92,255,.5);display:flex;align-items:center;justify-content:center;animation:pulse 1.8s ease-in-out infinite;margin-bottom:14px}
-#sound-unlock .su-ring svg{width:30px;height:30px;stroke:#a78bfa;fill:none;stroke-width:1.8}
-#sound-unlock .su-text{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;color:#a78bfa;text-transform:uppercase;font-weight:700}
-#sound-unlock .su-sub{font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:2px;color:#565678;margin-top:6px}
-@keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(124,92,255,.5)}50%{transform:scale(1.08);box-shadow:0 0 0 18px rgba(124,92,255,0)}}
+
+/* 🔊 FLOATING MUTE/UNMUTE BUTTON */
+#audio-toggle{
+  position:fixed;
+  bottom:16px;
+  right:16px;
+  z-index:50000;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:rgba(20,20,35,0.85);
+  border:1.5px solid rgba(124,92,255,.5);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  transition:.25s;
+  box-shadow:0 6px 20px rgba(0,0,0,.5);
+}
+#audio-toggle:hover{background:rgba(124,92,255,.25);border-color:var(--primary2);transform:scale(1.05)}
+#audio-toggle:active{transform:scale(.92)}
+#audio-toggle svg{width:20px;height:20px;stroke:var(--primary2);fill:none;stroke-width:2}
+#audio-toggle.muted svg{stroke:var(--red)}
+#audio-toggle.muted{border-color:rgba(248,113,113,.5)}
+
 @media (max-width:380px){.card-ui{max-width:100%;padding:16px 14px 14px}.option-btn{font-size:10px;padding:12px}}
 @media (max-height:640px){.card-ui{padding:14px 12px 12px}}
-@media (min-width:768px){.card-ui{max-width:380px;padding:24px 22px 22px}.option-btn{font-size:12px;padding:16px}}
+@media (min-width:768px){.card-ui{max-width:380px;padding:24px 22px 22px}.option-btn{font-size:12px;padding:16px}#audio-toggle{width:50px;height:50px;bottom:22px;right:22px}#audio-toggle svg{width:22px;height:22px}}
 </style>
 </head>
 <body>
 
-<!-- SOUND UNLOCK OVERLAY -->
-<div id="sound-unlock">
-  <div class="su-ring">
-    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-      <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-      <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-    </svg>
-  </div>
-  <div class="su-text">TAP TO ENABLE SOUND</div>
-  <div class="su-sub">BACKGROUND AUDIO ON</div>
+<!-- 🔊 FLOATING AUDIO TOGGLE (visible on all screens) -->
+<div id="audio-toggle" title="Toggle sound">
+  <svg id="audio-icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+  </svg>
 </div>
 
-<video id="bg-video" autoplay loop playsinline>
+<video id="bg-video" autoplay loop muted playsinline>
   <source src="bg.mp4" type="video/mp4">
 </video>
 <div id="bg-overlay"></div>
@@ -129,7 +144,7 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
 <!-- SPLASH -->
 <div class="screen on" id="s-splash">
   <div class="sp-ring"></div>
-  <div class="sp-logo">ɴᴀɪʀᴏɴ</div>
+  <div class="sp-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
   <div class="sp-sub">INITIALIZING</div>
 </div>
 
@@ -141,7 +156,7 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
         <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
       </svg>
     </div>
-    <div class="brand-logo" style="font-size:13px;letter-spacing:3px">ɴᴀɪʀᴏɴ</div>
+    <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
     <div class="brand-tag">SYSTEM STATUS</div>
     <div class="msg err" id="mtMsg">SITE UNDER MAINTENANCE</div>
     <button class="back-btn" style="margin-top:14px" onclick="bootCheck()">RETRY</button>
@@ -151,7 +166,7 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
 <!-- LOGIN -->
 <div class="screen" id="s-login">
   <div class="card-ui">
-    <div class="brand-logo">ɴᴀɪʀᴏɴ</div>
+    <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
     <div class="brand-tag">◈ ACCESS CONTROL ◈</div>
     <div class="icon-box">
       <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
@@ -173,7 +188,7 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
 <!-- OPTIONS -->
 <div class="screen" id="s-options">
   <div class="card-ui">
-    <div class="brand-logo">ɴᴀɪʀᴏɴ</div>
+    <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
     <div class="brand-tag">◈ SELECT MODE ◈</div>
     <div class="icon-box">
       <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
@@ -200,7 +215,7 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
 <!-- API TOKEN -->
 <div class="screen" id="s-api">
   <div class="card-ui">
-    <div class="brand-logo">ɴᴀɪʀᴏɴ</div>
+    <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
     <div class="brand-tag">◈ API CONFIGURATION ◈</div>
     <div class="icon-box">
       <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
@@ -222,7 +237,7 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
 <!-- TOKEN -->
 <div class="screen" id="s-token">
   <div class="card-ui">
-    <div class="brand-logo">ɴᴀɪʀᴏɴ</div>
+    <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
     <div class="brand-tag">◈ TOKEN MANAGEMENT ◈</div>
     <div class="icon-box">
       <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
@@ -244,7 +259,7 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
 <!-- DETAILS SEARCH -->
 <div class="screen" id="s-search">
   <div style="width:100%;max-width:340px;padding-bottom:12px;text-align:center">
-    <div class="brand-logo">ɴᴀɪʀᴏɴ</div>
+    <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
     <div class="brand-tag" style="margin-bottom:0">◈ DETAILS ENGINE ◈</div>
   </div>
   <div class="search-box">
@@ -260,7 +275,7 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
 <!-- NUMBERS SEARCH -->
 <div class="screen" id="s-numbers">
   <div style="width:100%;max-width:340px;padding-bottom:12px;text-align:center">
-    <div class="brand-logo">ɴᴀɪʀᴏɴ</div>
+    <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
     <div class="brand-tag" style="margin-bottom:0">◈ NUMBERS ENGINE ◈</div>
   </div>
   <div class="search-box">
@@ -281,8 +296,6 @@ body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-he
 <script>
 const VERIFY_URL = 'https://bar-94.dobrain666.deno.net/';
 const SEARCH_URL = 'https://number2info.dobrain666.deno.net/proxy-search';
-
-/* ⚠️ REPLACE THIS with your Deno Deploy URL after deploying main.ts */
 const CNIC_PROXY = 'https://new-26.dobrain666.deno.net/cnic?number=';
 
 /* 🚫 BLOCKED NUMBERS — admin numbers */
@@ -390,7 +403,6 @@ $('getBtn').addEventListener('click', doSearch);
 async function doSearch(){
   const num=$('numInput').value.trim(), area=$('resultArea');
 
-  // 🚫 Check blocked number
   if(isBlocked(num)){
     $('numInput').classList.add('err');
     setTimeout(()=>$('numInput').classList.remove('err'),600);
@@ -430,7 +442,7 @@ function showResult(area, item){
   area.innerHTML=h;
 }
 
-// ---------- NUMBERS SEARCH (via Deno proxy) ----------
+// ---------- NUMBERS SEARCH ----------
 $('numInput2').addEventListener('input', e=>{ e.target.value = e.target.value.replace(/\D/g,'').slice(0,11); });
 $('numInput2').addEventListener('keydown', e=>{ if(e.key==='Enter') doNumbersSearch(); });
 $('getNumbersBtn').addEventListener('click', doNumbersSearch);
@@ -438,7 +450,6 @@ $('getNumbersBtn').addEventListener('click', doNumbersSearch);
 async function doNumbersSearch(){
   const num=$('numInput2').value.trim(), area=$('numbersArea');
 
-  // 🚫 Check blocked number
   if(isBlocked(num)){
     $('numInput2').classList.add('err');
     setTimeout(()=>$('numInput2').classList.remove('err'),600);
@@ -528,37 +539,57 @@ function esc(s){
 
 // ---------- AUDIO CONTROL ----------
 const bgVideo = document.getElementById('bg-video');
-const soundUnlock = document.getElementById('sound-unlock');
+const audioToggle = document.getElementById('audio-toggle');
+const audioIcon = document.getElementById('audio-icon');
 
-// Start muted so autoplay works on splash
+// Start muted (browsers block autoplay with sound)
 bgVideo.muted = true;
 bgVideo.volume = 1.0;
 bgVideo.play().catch(()=>{});
 
-// Tap to unmute (login page onwards)
-soundUnlock.addEventListener('click', async ()=>{
-  try{
-    bgVideo.muted = false;
-    bgVideo.volume = 1.0;
-    await bgVideo.play();
-  }catch(e){ console.warn('audio unlock failed', e); }
-  soundUnlock.classList.add('hide');
+// Try to auto-unmute on first user interaction (any click/tap)
+let autoUnmuteDone = false;
+function tryAutoUnmute(){
+  if(autoUnmuteDone) return;
+  autoUnmuteDone = true;
+  bgVideo.muted = false;
+  bgVideo.volume = 1.0;
+  bgVideo.play().catch(()=>{});
+  updateAudioIcon();
+}
+document.addEventListener('touchstart', tryAutoUnmute, { once:true, passive:true });
+document.addEventListener('click', tryAutoUnmute, { once:true });
+
+// Toggle button
+audioToggle.addEventListener('click', (e)=>{
+  e.stopPropagation();
+  bgVideo.muted = !bgVideo.muted;
+  bgVideo.play().catch(()=>{});
+  updateAudioIcon();
 });
 
-// Patch show() to mute video on non-login screens
-const _origShow = show;
-window.show = function(id){
-  _origShow(id);
-  if(id === 's-login'){
-    if(soundUnlock.classList.contains('hide')) bgVideo.muted = false;
+function updateAudioIcon(){
+  if(bgVideo.muted){
+    audioToggle.classList.add('muted');
+    audioIcon.innerHTML = `
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+      <line x1="23" y1="9" x2="17" y2="15"/>
+      <line x1="17" y1="9" x2="23" y2="15"/>
+    `;
   } else {
-    bgVideo.muted = true;
+    audioToggle.classList.remove('muted');
+    audioIcon.innerHTML = `
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+    `;
   }
-};
+}
+updateAudioIcon();
 
 window.addEventListener('load', ()=>{
   setTimeout(bootCheck, 1200);
 });
 </script>
 </body>
-</html>
+  </html>
