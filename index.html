@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover"/>
+<title>ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --primary:#7c5cff;--primary2:#a78bfa;--cyan:#22d3ee;--pink:#f472b6;
+  --green:#34d399;--red:#f87171;--amber:#fbbf24;
+  --text:#f5f5fa;--dim:#8b8ba7;--dim2:#565678;
+  --line:rgba(124,92,255,.18);--glass:rgba(20,20,35,.55);
+}
+html,body{height:100%;overflow:hidden}
+body{background:#06060c;color:var(--text);font-family:'Outfit',sans-serif;min-height:100dvh;height:100dvh;display:flex;justify-content:center;align-items:center;user-select:none;-webkit-user-select:none;overflow:hidden;position:relative}
+#bg-video{position:fixed;inset:0;z-index:-20;width:100%;height:100%;object-fit:cover;pointer-events:none;opacity:0.45}
+#bg-overlay{position:fixed;inset:0;z-index:-15;background:rgba(6,6,12,0.7);pointer-events:none}
+#grid{position:fixed;inset:0;z-index:-4;pointer-events:none;background-image:linear-gradient(rgba(124,92,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(124,92,255,.05) 1px,transparent 1px);background-size:36px 36px}
+#orbs{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(70px)}
+.orb.o1{width:44vmax;height:44vmax;left:-15vmax;top:-15vmax;background:radial-gradient(circle,rgba(124,92,255,.35),transparent 60%);animation:fl1 20s ease-in-out infinite alternate}
+.orb.o2{width:38vmax;height:38vmax;right:-14vmax;top:10vmax;background:radial-gradient(circle,rgba(34,211,238,.28),transparent 60%);animation:fl2 24s ease-in-out infinite alternate}
+.orb.o3{width:34vmax;height:34vmax;left:6vmax;bottom:-20vmax;background:radial-gradient(circle,rgba(244,114,182,.28),transparent 60%);animation:fl3 28s ease-in-out infinite alternate}
+@keyframes fl1{to{transform:translate(12vmax,8vmax) scale(1.2)}}
+@keyframes fl2{to{transform:translate(-10vmax,10vmax) scale(.9)}}
+@keyframes fl3{to{transform:translate(-8vmax,-8vmax) scale(1.25)}}
+::-webkit-scrollbar{width:0}
+.screen{position:fixed;inset:0;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;background:transparent;padding:14px;transition:opacity .4s,visibility .4s;opacity:0;visibility:hidden;pointer-events:none;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+.screen.on{opacity:1;visibility:visible;pointer-events:auto}
+.sp-ring{width:44px;height:44px;border-radius:50%;border:2px solid rgba(124,92,255,.2);border-top-color:#a78bfa;border-right-color:#22d3ee;animation:spSpin .9s linear infinite;box-shadow:0 0 22px rgba(124,92,255,.5);margin-bottom:14px}
+@keyframes spSpin{to{transform:rotate(360deg)}}
+.sp-logo{font-family:'Cinzel',serif;font-weight:900;font-size:16px;letter-spacing:5px;background:linear-gradient(90deg,#a78bfa,#22d3ee,#f472b6,#a78bfa);background-size:300% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 3s linear infinite;margin-bottom:8px;text-align:center}
+@keyframes shine{to{background-position:300% center}}
+.sp-sub{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--dim)}
+.card-ui{width:100%;max-width:340px;padding:18px 16px 16px;border-radius:16px;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);text-align:center;position:relative;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.5);margin:auto}
+.card-ui::before{content:'';position:absolute;top:0;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,var(--primary2),var(--cyan),transparent)}
+.brand-logo{font-family:'Cinzel',serif;font-weight:900;font-size:14px;letter-spacing:4px;background:linear-gradient(90deg,#fff,#a78bfa 40%,#22d3ee 70%,#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 5s linear infinite;margin-bottom:4px}
+.brand-tag{font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--dim);margin-bottom:14px}
+.icon-box{width:40px;height:40px;margin:0 auto 10px;border-radius:11px;background:linear-gradient(135deg,rgba(124,92,255,.25),rgba(244,114,182,.15));border:1px solid rgba(124,92,255,.4);display:flex;align-items:center;justify-content:center}
+.icon-box svg{width:18px;height:18px;stroke:var(--primary2);fill:none;stroke-width:1.8}
+.title{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2.5px;color:var(--text);font-weight:800;margin-bottom:4px;text-transform:uppercase}
+.desc{font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:1.2px;color:var(--dim);margin-bottom:12px}
+.input-wrap{position:relative;margin-bottom:10px}
+.inp{width:100%;padding:11px 12px;border-radius:10px;background:rgba(0,0,0,.35);border:1.5px solid rgba(124,92,255,.35);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:1.5px;text-align:center;outline:none;transition:.25s}
+.inp::placeholder{color:var(--dim2);letter-spacing:1px;font-weight:500;font-size:12px}
+.inp:focus{border-color:var(--primary2);box-shadow:0 0 0 3px rgba(124,92,255,.15),0 0 18px rgba(124,92,255,.35);background:rgba(0,0,0,.5)}
+.inp.err{border-color:var(--red);animation:shake .4s}
+.inp.ok{border-color:var(--green)}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.btn{width:100%;padding:11px;border-radius:10px;border:none;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,var(--primary),#a855f7 45%,#ec4899);box-shadow:0 6px 20px rgba(124,92,255,.4);transition:.25s;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+.msg{margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1.2px;min-height:12px;font-weight:700}
+.msg.err{color:var(--red)}
+.msg.ok{color:var(--green)}
+.msg.info{color:var(--dim)}
+.back-btn{margin-top:10px;width:100%;padding:9px;border-radius:9px;background:transparent;border:1px solid rgba(124,92,255,.4);color:var(--primary2);font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;cursor:pointer;text-transform:uppercase;transition:.25s}
+.back-btn:hover{background:rgba(124,92,255,.1)}
+.mt-icon{width:50px;height:50px;margin:0 auto 12px;border-radius:50%;background:linear-gradient(135deg,rgba(124,92,255,.25),rgba(34,211,238,.15));border:1px solid rgba(124,92,255,.4);display:flex;align-items:center;justify-content:center}
+.mt-icon svg{width:24px;height:24px;stroke:var(--primary2);fill:none;stroke-width:1.8}
+#s-search,#s-numbers{justify-content:flex-start;padding-top:24px;padding-bottom:24px}
+.search-box{width:100%;max-width:340px;display:flex;flex-direction:column;gap:10px}
+.result-area{width:100%;max-width:340px;margin-top:12px;display:flex;flex-direction:column;align-items:center}
+.option-grid{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.option-btn{padding:14px;border-radius:12px;border:1px solid rgba(124,92,255,.4);background:rgba(0,0,0,.35);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:.25s;display:flex;align-items:center;justify-content:center;gap:10px}
+.option-btn:hover{background:rgba(124,92,255,.15);border-color:var(--primary2)}
+.option-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8}
+.result-card{width:100%;background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:14px 12px;display:flex;flex-direction:column;gap:8px;animation:slideUp .4s ease}
+@keyframes slideUp{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}
+.row{display:flex;flex-direction:column;gap:2px}
+.row .label{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;font-weight:700}
+.row .value{font-size:12.5px;color:#fff;word-break:break-word;line-height:1.4}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(124,92,255,.3),transparent)}
+.numbers-list{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.num-item{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.05);padding:8px 10px;border-radius:8px;border-left:3px solid var(--cyan)}
+.num-item .num-label{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--primary2);font-weight:700;min-width:70px}
+.num-item .num-value{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px}
+.total-box{margin-top:6px;padding:8px;border-radius:8px;background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.25);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--cyan);font-weight:700;text-align:center}
+.error-card{width:100%;background:var(--glass);border:1px solid rgba(248,113,113,.4);border-radius:14px;padding:24px 16px;text-align:center;animation:slideUp .4s ease}
+.err-title{font-family:'Cinzel',serif;font-size:14px;letter-spacing:3px;font-weight:700;color:var(--red);margin-bottom:6px}
+.err-sub{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--dim);letter-spacing:1.5px}
+.loader{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);display:none;flex-direction:column;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.loader.on{display:flex}
+.loader-ring{width:44px;height:44px;border-radius:50%;border:2px solid transparent;border-top-color:#22d3ee;border-right-color:#b14dff;animation:spSpin .9s linear infinite}
+.loader-text{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--cyan);text-transform:uppercase}
+@media (max-width:380px){.card-ui{max-width:100%;padding:16px 14px 14px}.option-btn{font-size:10px;padding:12px}}
+@media (max-height:640px){.card-ui{padding:14px 12px 12px}}
+@media (min-width:768px){.card-ui{max-width:380px;padding:24px 22px 22px}.option-btn{font-size:12px;padding:16px}}
+</style>
+</head>
+<body>
+
+<video id="bg-video" autoplay loop muted playsinline>
+  <source src="bg.mp4" type="video/mp4">
+</video>
+<div id="bg-overlay"></div>
+<div id="grid"></div>
+<div id="orbs"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i></div>
+
+<!-- SPLASH -->
+<div class="screen on" id="s-splash">
+  <div class="sp-ring"></div>
+  <div class="sp-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
+  <div class="sp-sub">INITIALIZING</div>
+</div>
+
+<!-- MAINTENANCE -->
+<div class="screen" id="s-maint">
+  <div class="card-ui">
+    <div class="mt-icon">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+      </svg>
+    </div>
+    <div class="brand-logo" style="font-size:13px;letter-spacing:3px">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
+    <div class="brand-tag">SYSTEM STATUS</div>
+    <div class="msg err" id="mtMsg">SITE UNDER MAINTENANCE</div>
+    <button class="back-btn" style="margin-top:14px" onclick="bootCheck()">RETRY</button>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div class="screen" id="s-login">
+  <div class="card-ui">
+    <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
+    <div class="brand-tag">◈ ACCESS CONTROL ◈</div>
+    <div class="icon-box">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        <circle cx="12" cy="16" r="1.5"/>
+      </svg>
+    </div>
+    <div class="title">ENTER ACCESS KEY</div>
+    <div class="desc">VERIFY TO CONTINUE</div>
+    <div class="input-wrap">
+      <input type="password" class="inp" id="loginKey" placeholder="••••••••" autocomplete="off"/>
+    </div>
+    <button class="btn" id="loginBtn">UNLOCK</button>
+    <div class="msg info" id="loginMsg">Waiting for key...</div>
+  </div>
+</div>
+
+<!-- OPTIONS -->
+<div class="screen" id="s-options">
+  <div class="card-ui">
+    <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
+    <div class="brand-tag">◈ SELECT MODE ◈</div>
+    <div class="icon-box">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+    </div>
+    <div class="title">CHOOSE MODE</div>
+    <div class="desc">SELECT SEARCH TYPE</div>
+    <div class="option-grid">
+      <button class="option-btn" id="optDetails">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 8h18"/><path d="M8 12h2"/><path d="M8 16h2"/><path d="M14 12h2"/><path d="M14 16h2"/></svg>
+        NUMBER DETAILS
+      </button>
+      <button class="option-btn" id="optNumbers">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></svg>
+        NUMBERS
+      </button>
+    </div>
+    <button class="back-btn" onclick="logout()" style="margin-top:14px">← BACK TO LOGIN</button>
+  </div>
+</div>
+
+<!-- API TOKEN -->
+<div class="screen" id="s-api">
+  <div class="card-ui">
+    <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
+    <div class="brand-tag">◈ API CONFIGURATION ◈</div>
+    <div class="icon-box">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+    </div>
+    <div class="title">API TOKEN</div>
+    <div class="desc">UPDATE SEARCH TOKEN</div>
+    <div class="input-wrap">
+      <input type="text" class="inp" id="apiToken" placeholder="Enter new token" autocomplete="off"/>
+    </div>
+    <button class="btn" id="apiSave">SAVE TOKEN</button>
+    <button class="back-btn" onclick="logout()">← BACK TO LOGIN</button>
+    <div class="msg info" id="apiMsg"></div>
+  </div>
+</div>
+
+<!-- TOKEN -->
+<div class="screen" id="s-token">
+  <div class="card-ui">
+    <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
+    <div class="brand-tag">◈ TOKEN MANAGEMENT ◈</div>
+    <div class="icon-box">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+    </div>
+    <div class="title">CURRENT TOKEN</div>
+    <div class="desc">VIEW OR UPDATE TOKEN</div>
+    <div class="input-wrap">
+      <input type="text" class="inp" id="tokInput" placeholder="Enter new token" autocomplete="off"/>
+    </div>
+    <button class="btn" id="tokSave">SAVE TOKEN</button>
+    <button class="back-btn" onclick="logout()">← BACK TO LOGIN</button>
+    <div class="msg info" id="tokMsg"></div>
+  </div>
+</div>
+
+<!-- DETAILS SEARCH -->
+<div class="screen" id="s-search">
+  <div style="width:100%;max-width:340px;padding-bottom:12px;text-align:center">
+    <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
+    <div class="brand-tag" style="margin-bottom:0">◈ DETAILS ENGINE ◈</div>
+  </div>
+  <div class="search-box">
+    <div class="input-wrap" style="margin-bottom:0">
+      <input type="tel" class="inp" id="numInput" placeholder="03xxxxxxxx" inputmode="numeric" maxlength="11" autocomplete="off"/>
+    </div>
+    <button class="btn" id="getBtn">GET DATA</button>
+    <button class="back-btn" id="backFromSearch">← BACK TO OPTIONS</button>
+  </div>
+  <div class="result-area" id="resultArea"></div>
+</div>
+
+<!-- NUMBERS SEARCH -->
+<div class="screen" id="s-numbers">
+  <div style="width:100%;max-width:340px;padding-bottom:12px;text-align:center">
+    <div class="brand-logo">ɴᴀɪʀᴏɴ x ᴍᴀᴠɪᴀ</div>
+    <div class="brand-tag" style="margin-bottom:0">◈ NUMBERS ENGINE ◈</div>
+  </div>
+  <div class="search-box">
+    <div class="input-wrap" style="margin-bottom:0">
+      <input type="tel" class="inp" id="numInput2" placeholder="03xxxxxxxx" inputmode="numeric" maxlength="11" autocomplete="off"/>
+    </div>
+    <button class="btn" id="getNumbersBtn">GET NUMBERS</button>
+    <button class="back-btn" id="backFromNumbers">← BACK TO OPTIONS</button>
+  </div>
+  <div class="result-area" id="numbersArea"></div>
+</div>
+
+<div class="loader" id="loader">
+  <div class="loader-ring"></div>
+  <div class="loader-text">SEARCHING</div>
+</div>
+
+<script>
+const VERIFY_URL = 'https://bar-94.dobrain666.deno.net/';
+const SEARCH_URL = 'https://number2info.dobrain666.deno.net/proxy-search';
+
+/* ⚠️ REPLACE THIS with your Deno Deploy URL after deploying main.ts */
+const CNIC_PROXY = 'https://new-26.dobrain666.deno.net/cnic?number=';
+
+const LS_KEY = 'nairon_mavia_cfg';
+const $ = id => document.getElementById(id);
+
+function getCfg(){ try{ const r=localStorage.getItem(LS_KEY); return r?JSON.parse(r):{}; }catch(e){ return {}; } }
+function saveCfg(c){ try{ localStorage.setItem(LS_KEY, JSON.stringify(c)); }catch(e){} }
+function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); const el=$(id); if(el) el.classList.add('on'); }
+
+async function verify(key){
+  try{
+    const r = await fetch(VERIFY_URL + '?key=' + encodeURIComponent(key), { cache:'no-store' });
+    if(!r.ok) return null;
+    return await r.json();
+  }catch(e){ return null; }
+}
+async function checkMaintenance(){
+  try{
+    const r = await fetch(VERIFY_URL + 'maintenance-status', { cache:'no-store' });
+    if(r.ok){ const d = await r.json(); return !!d.active; }
+  }catch(e){}
+  const d = await verify('maintenance');
+  return !!(d && d.status === 'verified' && String(d.name).toLowerCase() === 'active');
+}
+async function bootCheck(){
+  show('s-maint');
+  $('mtMsg').className='msg info'; $('mtMsg').textContent='VERIFYING SYSTEM...';
+  const maintOn = await checkMaintenance();
+  if(maintOn){ $('mtMsg').className='msg err'; $('mtMsg').textContent='✕ SITE UNDER MAINTENANCE'; return; }
+  const aRes = await verify('api'); if(aRes && aRes.status==='verified' && aRes.name){ const c=getCfg(); c.token=aRes.name; saveCfg(c); }
+  const tRes = await verify('token'); if(tRes && tRes.status==='verified' && tRes.name){ const c=getCfg(); c.token=tRes.name; saveCfg(c); }
+  $('mtMsg').className='msg ok'; $('mtMsg').textContent='✓ SYSTEM READY';
+  setTimeout(()=>show('s-login'), 400);
+}
+
+async function login(){
+  const inp=$('loginKey'), btn=$('loginBtn'), msg=$('loginMsg');
+  const key = inp.value.trim();
+  if(!key){ inp.classList.add('err'); msg.className='msg err'; msg.textContent='✕ Enter key'; setTimeout(()=>inp.classList.remove('err'),500); return; }
+  inp.classList.remove('err','ok');
+  btn.disabled = true; const old = btn.innerHTML; btn.innerHTML = 'VERIFYING...';
+  msg.className='msg info'; msg.textContent='Contacting server...';
+  const data = await verify(key);
+  if(!data || data.status !== 'verified'){
+    inp.classList.add('err'); msg.className='msg err'; msg.textContent='✕ Invalid Key';
+    setTimeout(()=>inp.classList.remove('err'),600);
+    btn.disabled=false; btn.innerHTML=old; return;
+  }
+  inp.classList.add('ok'); msg.className='msg ok'; msg.textContent='✓ '+(data.name||key);
+  const nameLower = String(data.name||'').toLowerCase();
+  setTimeout(()=>{
+    inp.value='';
+    if(nameLower==='api'){ $('apiToken').value=''; $('apiMsg').className='msg info'; $('apiMsg').textContent='Enter new token'; show('s-api'); }
+    else if(nameLower==='token'){ const c=getCfg(); $('tokInput').value=c.token||''; $('tokMsg').className='msg info'; $('tokMsg').textContent=''; show('s-token'); }
+    else { show('s-options'); }
+    btn.disabled=false; btn.innerHTML=old;
+  },500);
+}
+$('loginBtn').addEventListener('click', login);
+$('loginKey').addEventListener('keydown', e=>{ if(e.key==='Enter') login(); });
+
+$('apiSave').addEventListener('click', async ()=>{
+  const val=$('apiToken').value.trim(), msg=$('apiMsg');
+  if(!val){ msg.className='msg err'; msg.textContent='✕ empty'; return; }
+  msg.className='msg info'; msg.textContent='Saving...';
+  try{
+    const r = await fetch(VERIFY_URL+'admin/token',{method:'POST',headers:{'Content-Type':'application/json','X-Admin-Token':val},body:JSON.stringify({token:val})});
+    const d = await r.json();
+    if(d.success){ const c=getCfg(); c.token=val; saveCfg(c); msg.className='msg ok'; msg.textContent='✓ Token updated'; }
+    else { msg.className='msg err'; msg.textContent='✕ '+(d.error||'failed'); }
+  }catch(e){ const c=getCfg(); c.token=val; saveCfg(c); msg.className='msg ok'; msg.textContent='✓ Saved locally'; }
+});
+$('tokSave').addEventListener('click', async ()=>{
+  const val=$('tokInput').value.trim(), msg=$('tokMsg');
+  if(!val){ msg.className='msg err'; msg.textContent='✕ empty'; return; }
+  msg.className='msg info'; msg.textContent='Saving...';
+  try{
+    const r = await fetch(VERIFY_URL+'admin/token',{method:'POST',headers:{'Content-Type':'application/json','X-Admin-Token':val},body:JSON.stringify({token:val})});
+    const d = await r.json();
+    if(d.success){ const c=getCfg(); c.token=val; saveCfg(c); msg.className='msg ok'; msg.textContent='✓ Token updated'; }
+    else { msg.className='msg err'; msg.textContent='✕ '+(d.error||'failed'); }
+  }catch(e){ const c=getCfg(); c.token=val; saveCfg(c); msg.className='msg ok'; msg.textContent='✓ Saved locally'; }
+});
+
+function logout(){ $('loginKey').value=''; $('loginMsg').className='msg info'; $('loginMsg').textContent='Waiting for key...'; show('s-login'); }
+
+$('optDetails').addEventListener('click', ()=>{ $('numInput').value=''; $('resultArea').innerHTML=''; show('s-search'); setTimeout(()=>$('numInput').focus(),400); });
+$('optNumbers').addEventListener('click', ()=>{ $('numInput2').value=''; $('numbersArea').innerHTML=''; show('s-numbers'); setTimeout(()=>$('numInput2').focus(),400); });
+$('backFromSearch').addEventListener('click', ()=> show('s-options'));
+$('backFromNumbers').addEventListener('click', ()=> show('s-options'));
+
+// ---------- DETAILS SEARCH ----------
+$('numInput').addEventListener('input', e=>{ e.target.value = e.target.value.replace(/\D/g,'').slice(0,11); });
+$('numInput').addEventListener('keydown', e=>{ if(e.key==='Enter') doSearch(); });
+$('getBtn').addEventListener('click', doSearch);
+
+async function doSearch(){
+  const num=$('numInput').value.trim(), area=$('resultArea');
+  if(num.length<10){ $('numInput').classList.add('err'); setTimeout(()=>$('numInput').classList.remove('err'),500); return; }
+  $('loader').classList.add('on'); $('getBtn').disabled=true; area.innerHTML='';
+  const c=getCfg(); const headers={}; if(c.token) headers['X-Auth-Token']=c.token;
+  try{
+    const res = await fetch(SEARCH_URL+'?query='+encodeURIComponent(num),{method:'GET',headers,cache:'no-store'});
+    const data = await res.json().catch(()=>null);
+    await new Promise(r=>setTimeout(r,350));
+    $('loader').classList.remove('on'); $('getBtn').disabled=false;
+    if(!data || data.success!==true || !data.data || !data.data[0]){ showError(area,'DATA NOT FOUND'); return; }
+    showResult(area, data.data[0]);
+  }catch(e){
+    console.error(e);
+    await new Promise(r=>setTimeout(r,250));
+    $('loader').classList.remove('on'); $('getBtn').disabled=false;
+    showError(area,'DATA NOT FOUND');
+  }
+}
+function showResult(area, item){
+  const rows=[
+    {label:'Name',value:item.name||'N/A'},
+    {label:'Mobile',value:item.mobile||'N/A'},
+    {label:'CNIC',value:item.cnic||'N/A'},
+    {label:'Address',value:item.address||'N/A'},
+    {label:'Network',value:item.network||'N/A'},
+    {label:'Num2Name',value:(item.Num2Name===null||item.Num2Name===undefined||item.Num2Name==='')?'N/A':item.Num2Name}
+  ];
+  let h='<div class="result-card">';
+  rows.forEach((r,i)=>{ h+=`<div class="row"><div class="label">${r.label}</div><div class="value">${esc(String(r.value))}</div></div>`; if(i<rows.length-1) h+='<div class="divider"></div>'; });
+  h+='</div>';
+  area.innerHTML=h;
+}
+
+// ---------- NUMBERS SEARCH (via Deno proxy) ----------
+$('numInput2').addEventListener('input', e=>{ e.target.value = e.target.value.replace(/\D/g,'').slice(0,11); });
+$('numInput2').addEventListener('keydown', e=>{ if(e.key==='Enter') doNumbersSearch(); });
+$('getNumbersBtn').addEventListener('click', doNumbersSearch);
+
+async function doNumbersSearch(){
+  const num=$('numInput2').value.trim(), area=$('numbersArea');
+  if(num.length<10){ $('numInput2').classList.add('err'); setTimeout(()=>$('numInput2').classList.remove('err'),500); return; }
+  $('loader').classList.add('on'); $('getNumbersBtn').disabled=true; area.innerHTML='';
+
+  try{
+    // Step 1: Get CNIC via main search API
+    const c=getCfg(); const headers={}; if(c.token) headers['X-Auth-Token']=c.token;
+    const searchRes = await fetch(SEARCH_URL+'?query='+encodeURIComponent(num),{method:'GET',headers,cache:'no-store'});
+    const searchData = await searchRes.json().catch(()=>null);
+
+    if(!searchData || searchData.success!==true || !searchData.data || !searchData.data[0]){
+      await new Promise(r=>setTimeout(r,300));
+      $('loader').classList.remove('on'); $('getNumbersBtn').disabled=false;
+      showError(area,'DATA NOT FOUND'); return;
+    }
+    const cnic = searchData.data[0].cnic;
+    if(!cnic){
+      await new Promise(r=>setTimeout(r,300));
+      $('loader').classList.remove('on'); $('getNumbersBtn').disabled=false;
+      showError(area,'CNIC NOT FOUND'); return;
+    }
+
+    // Step 2: Fetch numbers from Deno proxy
+    const cnicRes = await fetch(CNIC_PROXY + encodeURIComponent(cnic), { cache:'no-store' });
+    const cnicData = await cnicRes.json().catch(()=>null);
+
+    await new Promise(r=>setTimeout(r,350));
+    $('loader').classList.remove('on'); $('getNumbersBtn').disabled=false;
+
+    if(!cnicData){ showError(area,'PROXY ERROR'); return; }
+    if(cnicData.error){ console.error('Proxy error:', cnicData.error); showError(area,'API ERROR'); return; }
+    if(!cnicData.numbers || !Array.isArray(cnicData.numbers) || cnicData.numbers.length===0){
+      showError(area,'NO NUMBERS FOUND'); return;
+    }
+    showNumbers(area, cnicData.numbers, cnicData.name);
+  }catch(e){
+    console.error(e);
+    await new Promise(r=>setTimeout(r,250));
+    $('loader').classList.remove('on'); $('getNumbersBtn').disabled=false;
+    showError(area,'DATA NOT FOUND');
+  }
+}
+
+function showNumbers(area, numbers, name){
+  const formatted = numbers.map(n=>{
+    let s = String(n).trim();
+    if(s.startsWith('92')) s = '0' + s.slice(2);
+    return s;
+  });
+  const ordinals=['FIRST NUMBER','SECOND NUMBER','THIRD NUMBER','FOURTH NUMBER','FIFTH NUMBER','SIXTH NUMBER','SEVENTH NUMBER','EIGHTH NUMBER','NINTH NUMBER','TENTH NUMBER'];
+  let h='<div class="result-card">';
+  if(name){ h+=`<div class="row"><div class="label">Name</div><div class="value">${esc(String(name))}</div></div><div class="divider"></div>`; }
+  h+='<div class="numbers-list">';
+  formatted.forEach((n,i)=>{ const label = ordinals[i] || `NUMBER ${i+1}`; h+=`<div class="num-item"><span class="num-label">${label}</span><span class="num-value">${esc(n)}</span></div>`; });
+  h+='</div>';
+  h+=`<div class="total-box">TOTAL RESULTS: ${formatted.length}</div>`;
+  h+='</div>';
+  area.innerHTML=h;
+}
+
+function showError(area,msg){
+  area.innerHTML=`<div class="error-card"><div class="err-title">${msg}</div><div class="err-sub">NO RECORD AVAILABLE</div></div>`;
+}
+function esc(s){
+  return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+window.addEventListener('load', ()=>{
+  const vid = document.getElementById('bg-video');
+  if(vid) vid.play().catch(()=>{});
+  setTimeout(bootCheck, 1200);
+});
+</script>
+</body>
+</html>
